@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 }); */
 Route::group(['prefix'=> 'v1'], function(){
 
+    Route::post('transaction/paiement','Api\PaiementController@store');
+
+    Route::get('transaction/paiement/{id}','Api\PaiementController@getTransaction');
+
+
     Route::get('listes/chapitres','Api\ApiController@listesChapitresApi');
     Route::get('listes/sujet/bychapitreid/{id}','Api\ApiController@listSujetByChapitreID');
     Route::get('listes/question/bySujetchapitre/{id}','Api\ApiController@sujetByChapitreQuestionapi');
