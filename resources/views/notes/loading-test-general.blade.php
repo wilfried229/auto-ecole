@@ -26,7 +26,7 @@ Auto-Ecole
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Tests Généraux ({{date('d/M/Y',strtotime($UserNameByChapitresSujet->created_at))}})</h1>
+            <h1 class="m-0 text-dark">Tests Généraux ({{date('d/M/Y H:i',strtotime($note->users()->first()->created_at))}})</h1>
             <h1 class="m-0 text-dark"> </h1>
 
           </div><!-- /.col -->
@@ -61,7 +61,7 @@ Auto-Ecole
                 <div class="card-header">
                   <h3 class="card-title">
                     <i class="fa fa-user"></i>
-                Candidat: {{$UserNameByChapitresSujet->name}} {{$UserNameByChapitresSujet->prenom}}
+                Candidat: {{$note->users()->first()->name}} {{$note->users()->first()->prenom}}
                   </h3>
 
                   <div class="card-tools">
@@ -97,7 +97,7 @@ Auto-Ecole
                     <!-- ./col -->
                     <div class="col-6 col-md-4 text-center">
 
-                    <a href="{{route('corrigerQuestionTest.user',1)}}" type="submit" class="btn btn-info" title="cliquez ici pour voir la correction">Voir la Corretion</a>
+                    <a href="{{route('corrigerQuestionTest.user')}}" type="submit" class="btn btn-info" title="cliquez ici pour voir la correction">Voir la Corretion</a>
                     </div>
 
                     <!-- ./col -->

@@ -45,7 +45,7 @@ Auto-Ecole
           <div class="card card-success">
 
                 <a class="btn btn-block btn-success"  href="#"   data-toggle="collapse" data-target="#collapseExample{{ $key }}"  data-whatever="@getbootstrap">
-                    <h4> Chapitre {{$c}}</h4>
+                    <h4>  {{$c}}</h4>
                 </a><!-- /.card-header -->
 
                 <div class="collapse" id="collapseExample{{ $key }}" data-parent="#accordionExample{{ $key }}">
@@ -73,8 +73,8 @@ Auto-Ecole
                                     @foreach ($notesTestGenerales as $n)
 
                                     <tr>
-                                        <td>{{$n->name}} {{$n->prenom}}</td>
-                                        <td>{{$n->note}}</td>
+                                        <td>{{$n->users()->first()->name}} {{$n->users()->first()->prenom}}</td>
+                                        <td>{{$n->note}}/20</td>
                                         <td>{{$n->created_at}}</td>
 
                                     </tr>
@@ -89,9 +89,9 @@ Auto-Ecole
                                     @foreach ($notes as $n)
 
                                     <tr>
-                                        <td>{{$n->name}} {{$n->prenom}}</td>
+                                        <td>{{$n->users()->first()->name}} {{$n->users()->first()->prenom}}</td>
                                         <td>{{$n->titre}}</td>
-                                        <td>{{$n->note}}</td>
+                                        <td>{{$n->note}}/20</td>
                                         <td>{{$n->created_at}}</td>
 
                                     </tr>

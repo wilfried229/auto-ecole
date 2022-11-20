@@ -22,6 +22,7 @@ class CreateTestGeneralesTable extends Migration
             $table->bigInteger('test_id')->unsigned()->nullable();
             $table->bigInteger('question_id')->unsigned()->nullable();
             $table->bigInteger('sujet_id')->unsigned()->nullable();
+            $table->boolean('is_finish')->default(false);
 
             $table->timestamps();
 

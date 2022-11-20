@@ -19,6 +19,9 @@ Route::get('/', function () {
 });
 
 */
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/','HomeController@index')->name('home.index');
 
 Route::resources([
@@ -38,13 +41,13 @@ Route::get('listes/question/bySujetchapitre/{id}/{namechapitres}','QuestionsCont
 Route::post('reponse/by/user/examen','EvaluationController@addChoiceReponseUser');
 Route::post('note/by/user/examen','EvaluationController@addNoteUserBySujet');
 
-Route::post('resultats/questionByUserSujet','EvaluationController@resultatsQuestionByUser')->name('resultats.question.user');
+Route::get('resultats/questionByUserSujet','EvaluationController@resultatsQuestionByUser')->name('resultats.question.user');
 
 Route::post('resultats/question/speciaux','EvaluationController@resultatsQuestionByUserSujetSpeciaux')->name('resultats.question.user.sujet.Speciaux');
 
 
 
-Route::get('page/loadingbyResultats/{id}/{sujet}','EvaluationController@pageResultats')->name('resultats.pages');
+Route::get('page/loadingbyResultats/{sujet}','EvaluationController@pageResultats')->name('resultats.pages');
 
 Route::get('page/loadingbyResultats/sujet40/{id}/{sujet}','EvaluationController@pageResultatsBysujet40')->name('resultats.pages.sujet40');
 
@@ -54,20 +57,20 @@ Route::get('corriger/type/sujet40/{sujet}','EvaluationController@corrigerSujet40
 
 
 
-Route::get('corriger/loading/{user}/{sujet}/{questionId}','EvaluationController@corrigerUser')->name('corrigerUser');
+Route::get('corriger/loading/{sujet}/{questionId}','EvaluationController@corrigerUser')->name('corrigerUser');
 
 
 //les 32 sujets
 
 Route::get('les/38sujets', 'SujetsController@sujet38')->name('sujet32.list');
-Route::get('historique/resultats', 'HomeController@historisques')->name('historique.resultats');
+Route::get('historique/resultats', 'HistoriqueController@index')->name('historique.resultats');
 Route::get('test/generales/{nQuestion}', 'TestGeneralesController@testGenerales')->name('test.generales');
 
 
 
 //Test generales
-Route::get('test/page/loadingbyResultats/{user_id}','TestGeneralesController@pageResultats')->name('resultats.pages');
-Route::get('test/generale/corriger/type/{user}','TestGeneralesController@corrigerQuestionTest')->name('corrigerQuestionTest.user');
+Route::get('test/page/loadingbyResultats','TestGeneralesController@pageResultats')->name('resultats.pages');
+Route::get('test/generale/corriger/type','TestGeneralesController@corrigerQuestionTest')->name('corrigerQuestionTest.user');
 Route::get('test/corriger/loading/{user}/{questionId}','TestGeneralesController@correctionTestGenerales');
 Route::post('resultats/questionByUserSujet/testGenerales','TestGeneralesController@resultatsQuestionByUser')->name('resultats.question.user.testGenerale');
 

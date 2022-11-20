@@ -1,221 +1,208 @@
 @extends('templates.index-template')
 @section('title')
-Auto-Ecole
+    Auto-Ecole
 @endsection
 
 @section('style-css')
-
-
 @endsection()
 
 
 @section('content-wrapper')
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Questionnaires </h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                            <li class="breadcrumb-item active"> <a href="#" class="btn btn-danger">Arrêter</a> </li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+    @endsection
 
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Questionnaires </h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-            <li class="breadcrumb-item active"> <a href="#" class="btn btn-danger">Arrêter</a> </li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-@endsection
+    @section('content')
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Small boxes (Stat box) -->
 
-@section('content')
-<!-- Main content -->
-<section class="content">
-    <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
+                <div class="row">
 
-      <div class="row">
-
-        <div class="col-lg-12">
+                    <div class="col-lg-12">
                         <div class="card card-info">
-                                <div class="card-header">
+                            <div class="card-header">
 
-                                    {{-- {{$loop->iteration}} --}}
                                 <h3 class="card-title">
-                                    Question N°{{$i+1}}
-
-
+                                    Question N°{{ $i + 1 }}
                                 </h3>
 
-
-                                  <div class="card-tools">
+                                <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-widget="collapse">
                                         <i class="fa fa-server"></i>
                                     </button>
-                                  </div>
-                                  <!-- /.card-tools -->
                                 </div>
-                                <!-- /.card-header -->
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
 
-                                <!-- /.card-body -->
-                              </div>
+                            <!-- /.card-body -->
+                        </div>
 
-
-        </div>
-      </div>
-      <div class="container">
-
-        <div class="row">
-                <div class="col-md-4">
-
-                </div>
-
-                <div class="col-md-4" id="alert-reponse">
-                        <img src="{{asset('images/image.jpeg')}}" alt="" srcset="" >
-
-                </div>
-
-
-                <div class="col-md-4">
 
                     </div>
-        </div>
-           </div>
-           <br>
-      <div class="row">
+                </div>
+                <div class="container">
 
-          @foreach ($testGenerales as $list)
+                    <div class="row">
+                        <div class="col-md-4">
 
-          <audio id="myaudio"  autoplay="autoplay" loop>
-            <source media="(min-width: )"   src="{{asset('storage/audios/questions/'.$list->extension.'/'.$list->filename)}}" srcset="" type="audio/mp3">
-            </audio>
-          @endforeach
+                        </div>
 
-      </div>
-
-      <form  id="submitQuestion">
-          @csrf
-            <div class="row">
-
-                    @foreach ($testGenerales as $key => $q)
-                    <div class="col-lg-2">
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                <input type="checkbox" id="a"  name="type" value="{{$q->a}}">
-                                </span>
-                              </div>
-                              <button disabled="disabled" class="btn btn-info"> A</button>
-                            </div>
-                            <!-- /input-group -->
-                          </div>
-
-                          <!-- /.col-lg-6 -->
-                          <div class="col-lg-2">
-                                  <div class="input-group">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text">
-                                        <input type="checkbox" name="type" id="b" value="{{$q->b}}">
-                                      </span>
-                                    </div>
-                              <button disabled="disabled" class="btn btn-info"> B</button>
-
-                                  </div>
-                                  <!-- /input-group -->
-                                </div>
-                                @if ($q->c != null or $q->c !="")
-
-                                <div class="col-lg-2">
+                        <div class="col-md-4" id="alert-reponse">
+                            <img src="@if ($questions->img !=null)
+                            {{ asset('images/'.$questions->img ) }}
+                              
+                            @else
+                            {{ asset('images/image.jpeg') }}
+                            @endif" alt="" srcset="">
+                        </div>
 
 
-                                  <div class="input-group">
-                                          <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                            <input type="checkbox" id="c" name="type" value="{{$q->c}}">
-                                            </span>
-                                          </div>
-                                          <button disabled="disabled" class="btn btn-info"> C</button>
+                        <div class="col-md-4">
 
-                                        </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
 
-                                      <!-- /input-group -->
-                                    </div>
-                                    @endif
-                                    @if ($q->d !=null or $q->d !="")
-
-                                    <div class="col-lg-2">
-
-                                      <div class="input-group">
-                                              <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                  <input type="checkbox" id="d" name="type" value="{{$q->d}}">
-                                                </span>
-                                              </div>
-                                              <button disabled="disabled" class="btn btn-info"> D</button>
-
-                                            </div>
-
-                                          <!-- /input-group -->
-                                        </div>
-                                        @endif
-
-                                        @if ($key != 20)
-                                        <div class="col-lg-2">
-
-
-                                                <a id="link" href="#" class="btn btn-warning">Question Suivant</a>
-
-
-                                                {{-- <input type="submit" value="test" class="btn btn-info"> --}}
-                                            </div>
-                                                @else
-                                                <div class="col-lg-2">
-                                                <a href="#" id="linkFin" class="btn btn-warning">Question Suivant</a>
-                                                        </div>
-                                        @endif
-
-                                 <input type="hidden" name="" id="key" value="{{$i}}">
-
-                                 <input type="hidden" name="" id="reponse" value="{{$q->reponse}}">
-
-                                <input type="hidden" name="" id="questionId" value="{{$q->id}}">
-
-                                <input type="hidden" name="" id="sujetId" value="{{$q->sujet_id}}">
-
-                                <input type="hidden" name="" id="chapitreId" value="{{$q->chapitre_id}}">
-
-
-                                @endforeach
-
-                          </div>
+                    <audio id="myaudio" autoplay="autoplay" loop>
+                        <source media="(min-width: )"
+                            src="{{ asset('storage/audios/questions/' . $questions->extension . '/' . $questions->filename) }}"
+                            srcset="" type="audio/mp3">
+                    </audio>
 
                 </div>
+
+                <form id="submitQuestion">
+                    @csrf
+                    <div class="row">
+                        @if (in_array($questions->a, $typeQuestions))
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" id="a" name="type"
+                                                value="{{ $questions->a }}">
+                                        </span>
+                                    </div>
+                                    <button disabled="disabled" class="btn btn-info"> A</button>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                        @endif
+
+                        @if (in_array($questions->b, $typeQuestions))
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="type" id="b"
+                                                value="{{ $questions->b }}">
+                                        </span>
+                                    </div>
+                                    <button disabled="disabled" class="btn btn-info"> B</button>
+
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                        @endif
+
+                        @if (in_array($questions->c, $typeQuestions))
+                            <div class="col-lg-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" id="c" name="type"
+                                                value="{{ $questions->c }}">
+                                        </span>
+                                    </div>
+                                    <button disabled="disabled" class="btn btn-info"> C</button>
+
+                                </div>
+
+                                <!-- /input-group -->
+                            </div>
+                        @endif
+
+                        @if (in_array($questions->d, $typeQuestions))
+                            <div class="col-lg-2">
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" id="d" name="type"
+                                                value="{{ $questions->d }}">
+                                        </span>
+                                    </div>
+                                    <button disabled="disabled" class="btn btn-info"> D</button>
+
+                                </div>
+
+                                <!-- /input-group -->
+                            </div>
+                        @endif
+
+                        @if (in_array($questions->e, $typeQuestions))
+                        <div class="col-lg-2">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <input type="checkbox" id="e" name="type"
+                                            value="{{ $questions->e }}">
+                                    </span>
+                                </div>
+                                <button disabled="disabled" class="btn btn-info"> E</button>
+
+                            </div>
+
+                            <!-- /input-group -->
+                        </div>
+                        @endif
+
+                        <div class="col-lg-2">
+                            <a id="link" href="#" class="btn btn-warning">Question Suivante</a>
+                        </div>
+                        <input type="hidden" name="" id="key" value="{{ $i }}">
+                        <input type="hidden" name="" id="reponse" value="{{ $questions->reponse }}">
+                        <input type="hidden" name="" id="questionId" value="{{ $questions->id }}">
+                        <input type="hidden" name="" id="sujetId" value="{{ $questions->sujet_id }}">
+                        <input type="hidden" name="" id="chapitreId" value="{{ $questions->chapitre_id }}">
+
+                    </div>
 
             </div>
 
-      </form>
-
-
-    <div class="row">
-
-            <input type="hidden" name="" id="testId" value="{{$lastIdEvaluation}}">
-
     </div>
 
-
-</section>
+    </form>
+    </section>
 @endsection
 
 
 @section('custmo-js')
-<script src="{{asset('js/jquery.js')}}"></script>
-<script src="{{asset('js/test_generales.js')}}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/test_generales.js') }}"></script>
 
 
-<script>
-</script>
+    <script></script>
 @endsection
-
-

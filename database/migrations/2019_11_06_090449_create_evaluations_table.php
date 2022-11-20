@@ -22,6 +22,7 @@ class CreateEvaluationsTable extends Migration
             $table->bigInteger('chapitre_id')->unsigned()->nullable();
             $table->bigInteger('test_id')->unsigned()->nullable();
             $table->bigInteger('question_id')->unsigned()->nullable();
+            $table->boolean('is_finish')->default(false);
 
             $table->timestamps();
 

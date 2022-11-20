@@ -14,7 +14,8 @@ class AutoEcoleSeeder extends Seeder
     {
 
       
-        $noms = ['AUTO ECOLE REFERENCE DIVINE',
+        $noms = [
+            'AUTO ECOLE REFERENCE DIVINE',
             "AUTO ECOLE PACIFIQUE",
             "AUTO ECOLE LA PERSEVERANCE." ,
             "AUTO ECOLE LE VAINQUEUR PLUS",

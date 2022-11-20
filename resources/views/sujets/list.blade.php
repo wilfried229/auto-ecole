@@ -46,7 +46,7 @@ Auto-Ecole
         @foreach ($sujets as $s)
 
         <div class="col-md-4">
-            <a href="{{route('question.sujet.listes',['id'=>$s->id,'namechapitres'=>$nameChapitre->titre])}}">
+            <a href="{{route('question.sujet.listes',['id'=>$loop->iteration,'namechapitres'=>$nameChapitre->titre])}}">
                     <div class="card card-info">
                             <div class="card-header">
 
