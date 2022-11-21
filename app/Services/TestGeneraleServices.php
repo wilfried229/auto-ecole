@@ -6,12 +6,47 @@ use App\Models\NotesGenerale;
 use App\Models\TestGenerale;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class TestGeneraleServices
 {
 
 
+    public function __construct()
+    {
+        if (!Auth::check())
+        {
+
+        Redirect::to('/login');
+        // The user is logged in...
+        }
+    }
+
     public static  $typeQuestions = ['a', 'b', 'c', 'd', 'e'];
+
+
+    public static function saveTest($request)
+    {
+
+        try {
+            $user = Auth::user();
+            $number = Cache::get('testId');
+            $testGenerales = new TestGenerale();
+            $testGenerales->question_choice = $request->question_choice;
+            $testGenerales->vrai = $request->vrai;
+            $testGenerales->sujet_id = $request->sujet;
+            $testGenerales->chapitre_id = $request->chapitre_id;
+            $testGenerales->test_id = $number;
+            $testGenerales->user_id = $user->id;
+            $testGenerales->question_id = $request->question_id;
+            $testGenerales->save();
+            return $testGenerales;
+        } catch (\Throwable $th) {
+            Log::error("error" . $th->getMessage());
+            return false;
+        }
+    }
 
     public static function saveNoteUserTestGenerale(array $data)
     {
@@ -102,5 +137,11 @@ class TestGeneraleServices
                 "is_finish" => true,
             ]);
         return $updateTestGeneral;
+    }
+
+    public static function getTestGenerealeByUser(){
+        $evaluationsTestGenrale = TestGenerale::where('is_finish', false)
+        ->where('user_id', Auth::user()->id);
+           return $evaluationsTestGenrale;
     }
 }

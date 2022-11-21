@@ -17,25 +17,23 @@ class TestGeneralesController extends Controller
 {
     //
 
-    public function correctionTestGenerales($user, $questionId)
+    public function correctionTestGenerales($questionId)
     {
 
         $lastIdEvaluation = DB::table('test_generales')->latest('id')->first();
-        $questionchoiceByUser = TestGenerale::where('user_id', $user)
-            ->where('test_id', $lastIdEvaluation->test_id)
+        $questionchoiceByUser = TestGenerale::where('is_finish', false)
+         ->where('user_id', Auth::user()->id)
             ->where('question_id', $questionId)
             ->get()->first();
 
         $questions = Questions::where('id', $questionId)
             ->first();
-
-
         if ($questions != null) {
             if ($questions->reponse == $questionchoiceByUser->question_choice) {
-                $data = array('message' => 'Vrai', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice);
+                $data = array('message' => 'Vrai', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice,'srcImg' =>$questions->img);
                 return response()->json($data, 200);
             } else {
-                $data = array('message' => 'Faux', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice);
+                $data = array('message' => 'Faux', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice,'srcImg' =>$questions->img);
                 return response()->json($data, 200);
             }
         }
@@ -44,10 +42,8 @@ class TestGeneralesController extends Controller
 
     public function corrigerQuestionTest()
     {
-        $users = User::find(Auth::user()->id);
-        $questionByTestGenerales = TestGenerale::where('is_finish', false)
-            ->where('user_id', Auth::user()->id)
-            ->get();
+        $users = Auth::user();
+        $questionByTestGenerales = TestGeneraleServices::getTestGenerealeByUser()->get();
         return view('corriger.test_correction', compact('users', 'questionByTestGenerales'));
     }
 
@@ -57,8 +53,7 @@ class TestGeneralesController extends Controller
     public function testGenerales($nQuestion)
     {
         $i = $nQuestion;
-        if ($i == 0)TestGeneraleServices::initialisationTest();
-
+        if ($i == 0) TestGeneraleServices::initialisationTest();
         $typeQuestions = TestGeneraleServices::$typeQuestions;
         $questions = Questions::inRandomOrder()->first();
         return view('questions.test_generale', compact('questions', 'i', 'typeQuestions'));
@@ -75,19 +70,8 @@ class TestGeneralesController extends Controller
 
     public function addChoiceReponseUser(Request $request)
     {
-
         try {
-            $user = Auth::user();
-            $number = Cache::get('testId');
-            $testGenerales = new TestGenerale();
-            $testGenerales->question_choice = $request->question_choice;
-            $testGenerales->vrai = $request->vrai;
-            $testGenerales->sujet_id = $request->sujet;
-            $testGenerales->chapitre_id = $request->chapitre_id;
-            $testGenerales->test_id = $number;
-            $testGenerales->user_id = $user->id;
-            $testGenerales->question_id = $request->question_id;
-            $testGenerales->save();
+            $testGenerales =  TestGeneraleServices::saveTest($request);
             return response()->json($testGenerales, 200);
         } catch (\Throwable $th) {
             //throw $th;

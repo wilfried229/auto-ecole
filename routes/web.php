@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/','HomeController@index')->name('home.index');
@@ -32,6 +33,9 @@ Route::resources([
     'note' => 'NotesController'
 ]);
 
+
+Route::middleware(['auth'])->group(function () {
+    
 Route::get('listes/chapitres','ChapitresController@listesChapitres')->name('chapitre.listes');
 Route::get('listes/sujet/bychapitre/{name}','SujetsController@listSujetByChapitre')->name('sujet.listes');
 Route::get('listes/question/bySujetchapitre/{id}/{namechapitres}','QuestionsController@sujetByChapitreQuestion')->name('question.sujet.listes');
@@ -57,7 +61,7 @@ Route::get('corriger/type/sujet40/{sujet}','EvaluationController@corrigerSujet40
 
 
 
-Route::get('corriger/loading/{sujet}/{questionId}','EvaluationController@corrigerUser')->name('corrigerUser');
+Route::get('corriger/loading/{questionId}','EvaluationController@corrigerUser')->name('corrigerUser');
 
 
 //les 32 sujets
@@ -71,7 +75,7 @@ Route::get('test/generales/{nQuestion}', 'TestGeneralesController@testGenerales'
 //Test generales
 Route::get('test/page/loadingbyResultats','TestGeneralesController@pageResultats')->name('resultats.pages');
 Route::get('test/generale/corriger/type','TestGeneralesController@corrigerQuestionTest')->name('corrigerQuestionTest.user');
-Route::get('test/corriger/loading/{user}/{questionId}','TestGeneralesController@correctionTestGenerales');
+Route::get('test/corriger/loading/{questionId}','TestGeneralesController@correctionTestGenerales');
 Route::post('resultats/questionByUserSujet/testGenerales','TestGeneralesController@resultatsQuestionByUser')->name('resultats.question.user.testGenerale');
 
 Route::post('test/generale/by/user/examen','TestGeneralesController@addChoiceReponseUser');
@@ -83,9 +87,11 @@ Route::get('les/38/sujets','TestSujet38Controller@index')->name('test.sujet38');
 Route::get('list/38/sujets/{idQuestion}','TestSujet38Controller@listQuestion38')->name('test.listQuestion38');
 
 
-Auth::routes();
 ///https://noisim.net/permis/download/drivetool
 Route::get('download/drivetool','Api\ApiController@getDownload')->name('link');
 Route::get('drivetool/download','Api\ApiController@pageDownload')->name('link.page');
+
+});
+Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');

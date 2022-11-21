@@ -20,21 +20,17 @@ class EvaluationController extends Controller
 
 
 
-    public function corrigerUser($sujet,$questionId)
+    public function corrigerUser($questionId)
     {
 
         $questionchoiceByUser = TestSujetsServices::getAnswerByUserBySujet($questionId)->first();
-
-        Log::alert($questionId);
-
         $questions = Questions::where('id', $questionId)->first();
-
         if ($questions != null) {
             if ($questions->reponse == $questionchoiceByUser->question_choice) {
-                $data = array('message' => 'Vrai', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice);
+                $data = array('message' => 'Vrai', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice,'srcImg' =>$questions->img);
                 return response()->json($data, 200);
             } else {
-                $data = array('message' => 'Faux', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice);
+                $data = array('message' => 'Faux', 'reponse' => $questions->reponse, 'questionChoice' => $questionchoiceByUser->question_choice,'srcImg' =>$questions->img);
                 return response()->json($data, 200);
             }
         }

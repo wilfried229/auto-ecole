@@ -26,7 +26,7 @@ Auto-Ecole
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Tests Généraux ({{date('d/M/Y H:i',strtotime($note->users()->first()->created_at))}})</h1>
+            <h1 class="m-0 text-dark">Tests Généraux ({{date('d/M/Y H:i',strtotime($note->created_at))}})</h1>
             <h1 class="m-0 text-dark"> </h1>
 
           </div><!-- /.col -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Notes;
 use App\Models\NotesGenerale;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HistoriqueController extends Controller
 {
