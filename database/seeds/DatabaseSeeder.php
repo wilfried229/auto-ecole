@@ -16,6 +16,10 @@ class DatabaseSeeder extends Seeder
          $this->call(SujetTableSeeder::class);
          $this->call(QuestionTableSeeder::class);
          $this->call(AutoEcoleSeeder::class);
+         $this->call(QuestionFonSeeder::class);
+         $this->call(SujetFonSeeder::class);
+
+
 
 
 

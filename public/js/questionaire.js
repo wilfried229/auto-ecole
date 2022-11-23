@@ -1,4 +1,8 @@
 
+
+
+
+
 var loopCount = 0;
 document.getElementById('myaudio').addEventListener('timeupdate', function () {
     if (this.currentTime == 0) {
@@ -6,7 +10,7 @@ document.getElementById('myaudio').addEventListener('timeupdate', function () {
     }
     if (loopCount == 2) {
         this.pause();
-        //var   test = $('#link').attr('href');
+        var   test = $('#link').attr('href');
         if (test != undefined) {
             questionnaires();
             /*   setTimeout(() => {

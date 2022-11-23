@@ -23,74 +23,77 @@ Route::get('/', function () {
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/','HomeController@index')->name('home.index');
+Route::get('/', 'HomeController@index')->name('home.index');
 
-Route::resources([
-    'chapitre' => 'ChapitresController',
-    'question' => 'QuestionsController',
-    'reponse' => 'ReponsesController',
-    'sujet' => 'SujetsController',
-    'note' => 'NotesController'
-]);
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::resources([
+        'chapitre' => 'ChapitresController',
+        'question' => 'QuestionsController',
+        'reponse' => 'ReponsesController',
+        'sujet' => 'SujetsController',
+        'note' => 'NotesController'
+    ]);
     
-Route::get('listes/chapitres','ChapitresController@listesChapitres')->name('chapitre.listes');
-Route::get('listes/sujet/bychapitre/{name}','SujetsController@listSujetByChapitre')->name('sujet.listes');
-Route::get('listes/question/bySujetchapitre/{id}/{namechapitres}','QuestionsController@sujetByChapitreQuestion')->name('question.sujet.listes');
 
-// route add reponse user by test examen
+    Route::get('listes/chapitres', 'ChapitresController@listesChapitres')->name('chapitre.listes');
+    Route::get('listes/sujet/bychapitre/{name}', 'SujetsController@listSujetByChapitre')->name('sujet.listes');
+    Route::get('listes/question/bySujetchapitre/{id}/{namechapitres}', 'QuestionsController@sujetByChapitreQuestion')->name('question.sujet.listes');
 
-Route::post('reponse/by/user/examen','EvaluationController@addChoiceReponseUser');
-Route::post('note/by/user/examen','EvaluationController@addNoteUserBySujet');
+    // route add reponse user by test examen
 
-Route::get('resultats/questionByUserSujet','EvaluationController@resultatsQuestionByUser')->name('resultats.question.user');
-
-Route::post('resultats/question/speciaux','EvaluationController@resultatsQuestionByUserSujetSpeciaux')->name('resultats.question.user.sujet.Speciaux');
-
-
-
-Route::get('page/loadingbyResultats/{sujet}','EvaluationController@pageResultats')->name('resultats.pages');
-
-Route::get('page/loadingbyResultats/sujet40/{id}/{sujet}','EvaluationController@pageResultatsBysujet40')->name('resultats.pages.sujet40');
-
-
-Route::get('corriger/type/{sujet}','EvaluationController@corriger')->name('corriger.user');
-Route::get('corriger/type/sujet40/{sujet}','EvaluationController@corrigerSujet40')->name('corriger.user.sujet40');
+    Route::post('reponse/by/user/examen', 'EvaluationController@addChoiceReponseUser');
+    Route::post('note/by/user/examen', 'EvaluationController@addNoteUserBySujet');
+    Route::get('resultats/questionByUserSujet', 'EvaluationController@resultatsQuestionByUser')->name('resultats.question.user');
+    Route::post('resultats/question/speciaux', 'EvaluationController@resultatsQuestionByUserSujetSpeciaux')->name('resultats.question.user.sujet.Speciaux');
 
 
 
-Route::get('corriger/loading/{questionId}','EvaluationController@corrigerUser')->name('corrigerUser');
+    Route::get('page/loadingbyResultats/{sujet}', 'EvaluationController@pageResultats')->name('resultats.pages');
+    Route::get('page/loadingbyResultats/sujet40/{id}/{sujet}', 'EvaluationController@pageResultatsBysujet40')->name('resultats.pages.sujet40');
 
 
-//les 32 sujets
-
-Route::get('les/38sujets', 'SujetsController@sujet38')->name('sujet32.list');
-Route::get('historique/resultats', 'HistoriqueController@index')->name('historique.resultats');
-Route::get('test/generales/{nQuestion}', 'TestGeneralesController@testGenerales')->name('test.generales');
+    Route::get('corriger/type/{sujet}', 'EvaluationController@corriger')->name('corriger.user');
+    Route::get('corriger/type/sujet40/{sujet}', 'EvaluationController@corrigerSujet40')->name('corriger.user.sujet40');
 
 
 
-//Test generales
-Route::get('test/page/loadingbyResultats','TestGeneralesController@pageResultats')->name('resultats.pages');
-Route::get('test/generale/corriger/type','TestGeneralesController@corrigerQuestionTest')->name('corrigerQuestionTest.user');
-Route::get('test/corriger/loading/{questionId}','TestGeneralesController@correctionTestGenerales');
-Route::post('resultats/questionByUserSujet/testGenerales','TestGeneralesController@resultatsQuestionByUser')->name('resultats.question.user.testGenerale');
-
-Route::post('test/generale/by/user/examen','TestGeneralesController@addChoiceReponseUser');
-
-// les 38 SUJETS
-
-Route::get('les/38/sujets','TestSujet38Controller@index')->name('test.sujet38');
-
-Route::get('list/38/sujets/{idQuestion}','TestSujet38Controller@listQuestion38')->name('test.listQuestion38');
+    Route::get('corriger/loading/{questionId}', 'EvaluationController@corrigerUser')->name('corrigerUser');
 
 
-///https://noisim.net/permis/download/drivetool
-Route::get('download/drivetool','Api\ApiController@getDownload')->name('link');
-Route::get('drivetool/download','Api\ApiController@pageDownload')->name('link.page');
+    //les 32 sujets
 
+    Route::get('les/38sujets', 'SujetsController@sujet38')->name('sujet32.list');
+    Route::get('historique/resultats', 'HistoriqueController@index')->name('historique.resultats');
+    Route::get('test/generales/{nQuestion}', 'TestGeneralesController@testGenerales')->name('test.generales');
+
+
+
+    //Test generales
+    Route::get('test/page/loadingbyResultats', 'TestGeneralesController@pageResultats')->name('resultats.pages');
+    Route::get('test/generale/corriger/type', 'TestGeneralesController@corrigerQuestionTest')->name('corrigerQuestionTest.user');
+    Route::get('test/corriger/loading/{questionId}', 'TestGeneralesController@correctionTestGenerales');
+    Route::post('resultats/questionByUserSujet/testGenerales', 'TestGeneralesController@resultatsQuestionByUser')->name('resultats.question.user.testGenerale');
+    Route::post('test/generale/by/user/examen', 'TestGeneralesController@addChoiceReponseUser');
+
+    // les 38 SUJETS
+
+    Route::get('les/38/sujets', 'TestSujet38Controller@index')->name('test.sujet38');
+    Route::get('list/38/sujets/{idQuestion}', 'TestSujet38Controller@listQuestion38')->name('test.listQuestion38');
+    Route::get('download/drivetool', 'Api\ApiController@getDownload')->name('link');
+    Route::get('drivetool/download', 'Api\ApiController@pageDownload')->name('link.page');
+
+
+    Route::prefix('fon')->group(function () {
+        Route::get('sujets', 'EvaluationFonController@index')->name('sujet-fon.index');
+        Route::get('sujets/{idQuestion}', 'EvaluationFonController@listQuestion38')->name('test.listQuestion.fon');
+        Route::post('reponse/by/user/examen/fon', 'EvaluationFonController@addChoiceReponseUser');
+        Route::get('page/loadingbyResultats/fon/{sujet}', 'EvaluationFonController@pageResultats')->name('resultats.pages.fon');
+        Route::get('corriger/type-fon/{sujet}', 'EvaluationFonController@corriger')->name('corriger.user.fon');
+        Route::get('corriger/loading-fon/{questionId}', 'EvaluationFonController@corrigerUser')->name('corrigerUser.fon');
+    });
 });
 Auth::routes();
 

@@ -19,10 +19,7 @@ class Evaluations extends Model
         'test_id',
         'question_id',
         'is_finish'
-
     ];
-
-
 
     public  function users(){
 

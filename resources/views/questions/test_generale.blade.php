@@ -85,7 +85,7 @@
 
                     <audio id="myaudio" autoplay="autoplay" loop>
                         <source media="(min-width: )"
-                            src="{{ asset('storage/audios/questions/' . $questions->extension . '/' . $questions->filename) }}"
+                            src="{{ asset('audio/' .substr($questions->filename, 1)) }}"
                             srcset="" type="audio/mp3">
                     </audio>
 

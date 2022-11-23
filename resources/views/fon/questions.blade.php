@@ -14,7 +14,7 @@ Auto-Ecole
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Questionnaires </h1>
+                    <h1 class="m-0 text-dark">Questionnaires Fon </h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -69,19 +69,14 @@ Auto-Ecole
                     <div class="col-md-4">
 
                     </div>
-
-                    <div class="col-md-4" id="alert-reponse">
+                    @foreach ($listQuestion as $list)
+                    @if ($list->img != null)
+                        <img src="{{ asset('images/' . $list->img) }}" alt=""
+                            srcset="">
+                    @else
                         <img src="{{ asset('images/image.jpeg') }}" alt="" srcset="">
-
-                        @foreach ($listQuestion as $list)
-                        @if ($list->img != null)
-                            <img src="{{ asset('images/' . $list->img) }}" alt=""
-                                srcset="">
-                        @else
-                            <img src="{{ asset('images/image.jpeg') }}" alt="" srcset="">
-                        @endif
-                    @endforeach
-                    </div>
+                    @endif
+                @endforeach
 
 
                     <div class="col-md-4">
@@ -94,7 +89,7 @@ Auto-Ecole
 
                 @foreach ($listQuestion as $list)
                 <audio id="myaudio" autoplay="autoplay" loop>
-                    <source media="(min-width: )" src="{{ asset('audio/'.substr($list->filename, 1)) }}" srcset="" type="audio/mp3">
+                    <source media="(min-width: )" src="{{ asset('audio/' .substr($list->filename, 1)) }}" srcset="" type="audio/mp3">
                 </audio>
                 @endforeach
 
@@ -199,31 +194,6 @@ Auto-Ecole
 
 @section('custmo-js')
 <script src="{{ asset('js/jquery.js') }}"></script>
-
-
-<script>
-/* 
-let audio = document.getElementById('myaudio');
-    audio.loop = true;
-     let maxLoops = 0;
- let lastTime = 0;
- let loops = 0;
- audio.addEventListener('seeked', (e) => {
-   if (e.target.currentTime < lastTime) {
-     loops++;
-   }
-   if (loops >= maxLoops) {
-     e.target.pause();
-   }
-   lastTime = e.target.currentTime;
-
-   console.log("lastTime: "+lastTime);
-   console.log("loops: "+e.target.currentTime);
-
- }); */
-</script>
-
-
-<script src="{{ asset('js/questionaire.js') }}"></script> 
+<script src="{{ asset('js/questionaire_fon.js') }}"></script>
 @endsection
 

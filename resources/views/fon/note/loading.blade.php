@@ -95,7 +95,7 @@
                                     <!-- ./col -->
                                     <div class="col-6 col-md-4 text-center">
 
-                                        <a href="{{ route('corriger.user',['sujet'=>$UserNameByChapitresSujet->sujet_id]) }}"
+                                        <a href="{{ route('corriger.user.fon',['sujet'=>$UserNameByChapitresSujet->sujet_id]) }}"
                                             type="submit" class="btn btn-info"
                                             title="cliquez ici pour voir la correction">Voir la Corretion</a>
                                     </div>

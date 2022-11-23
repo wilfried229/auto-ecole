@@ -72,7 +72,7 @@
                         <div class="col-md-4" id="alert-reponse">
                             @foreach ($listQuestion as $list)
                                 @if ($list->img != null)
-                                    <img src="{{ asset('storage/audios/questions/img/' . $list->img) }}" alt=""
+                                    <img src="{{ asset('images/' . $list->img) }}" alt=""
                                         srcset="">
                                 @else
                                     <img src="{{ asset('images/image.jpeg') }}" alt="" srcset="">
@@ -93,7 +93,7 @@
                     @foreach ($listQuestion as $list)
                         <audio id="myaudio" autoplay="autoplay" loop>
                             <source media="(min-width: )"
-                                src="{{ asset('storage/audios/questions/' . $list->extension . '/' . $list->filename) }}"
+                                src="{{ asset('audio/'.substr($list->filename, 1)) }}"
                                 srcset="" type="audio/mp3">
                         </audio>
                     @endforeach
