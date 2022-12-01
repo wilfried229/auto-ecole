@@ -95,7 +95,7 @@ Auto-Ecole
                             <i class="fa fa-car"></i></span>
                         <div class="info-box-content" id="test">
                             <audio controls style="width: 150px;">
-                                <source media="(min-width: )" src="{{ asset('audio/'. substr($q->questions()->first()->filename, 1)) }}" srcset="" type="audio/mp3">
+                                <source media="(min-width: )" src="{{ asset('audioFon/'. substr($q->questions()->first()->filename, 1)) }}" srcset="" type="audio/mp3">
                             </audio>
          
                             <span class="info-box-number">Question N° {{ $loop->iteration }}</span>

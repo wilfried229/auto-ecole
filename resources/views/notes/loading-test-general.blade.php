@@ -61,7 +61,7 @@ Auto-Ecole
                 <div class="card-header">
                   <h3 class="card-title">
                     <i class="fa fa-user"></i>
-                Candidat: {{$note->users()->first()->name}} {{$note->users()->first()->prenom}}
+                Candidat: {{$note->users()->first()->name ?? ""}} {{$note->users()->first()->prenom ?? ""}}
                   </h3>
 
                   <div class="card-tools">
